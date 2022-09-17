@@ -29,14 +29,57 @@ are studying. Maybe later I'll wire this up to a shock collar.
 
 from tkinter import *
 from tkinter.ttk import *
+import random
 
-flashcard = ('Front of card', 'Back of card')
-frontcard = flashcard[0]
-backcard = flashcard[1]
+# exported anki deck is {front} {back} {number}
+# read cards from text file into list of cards
+flashcards = []
+with open('Spanish Vocabulary Top 5000 2.txt') as f:
+    for row in f:
+        card = row.split("		") # anki decks are tab delineated
+        if len(card) != 3: continue
+        flashcards.append(card)
+flashcards.sort(key= lambda x:int(x[2]))
+
+# select 10 cards
+cards = random.sample(flashcards, 10)
+
+
+# TODO save progress / studied cards
+
+flashcard = random.choice(cards)
 
 def showanswer():
-    lbl_display['text'] = backcard
+    lbl_display['text'] = flashcard[1]
     showans.pack_forget()
+    btn_easy.pack(side=LEFT)
+    btn_hard.pack(side=RIGHT)
+    btn_medium.pack(side=RIGHT)
+    
+def hidebuttons():
+    btn_easy.pack_forget()
+    btn_medium.pack_forget()
+    btn_hard.pack_forget()
+    showans.pack()
+
+def logeasy():
+    # update card rating // time to see again
+    # move to next card
+    cards.remove(flashcard)
+    lbl_display['text'] = flashcard[0]
+    hidebuttons()
+
+def logmedium():
+    #TODO update card rating // time to see again
+    # move to next card
+    lbl_display['text'] = flashcard[0]
+    hidebuttons()
+
+def loghard():
+    # update card rating // time to see again
+    # move to next card
+    lbl_display['text'] = flashcard[0]
+    hidebuttons()
 
 window = Tk()
 window.title('Scanki')
@@ -49,17 +92,15 @@ frame2= Frame(borderwidth=1)
 frame1.grid(padx= 5, pady= 5, row=0, column= 0)
 frame2.grid(row=1, column=0, sticky='s')
 
-lbl_display = Label(master=frame1, text = frontcard)
+lbl_display = Label(master=frame1, text = flashcard[0])
 lbl_display.pack()
 
 showans = Button(master=frame2, text= "Show Answer", command=showanswer)
 showans.pack()
 
 
-
-
-"""hard = Button(text = "Hard", foreground='red')
-medium = Button(text = "Medium", foreground='orange')
-easy = Button(text ="Easy", foreground='green')"""
+btn_hard = Button(master=frame2, text = "Hard", command=loghard)
+btn_medium = Button(master=frame2, text = "Medium", command=logmedium)
+btn_easy = Button(master=frame2, text ="Easy", command=logeasy)
 
 window.mainloop()
