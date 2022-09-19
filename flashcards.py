@@ -12,21 +12,29 @@ with open('Spanish Vocabulary Top 5000 2.txt') as f:
         if len(card) != 3: 
             continue # skip non-compliant cards
         flashcards.append(card)
-flashcards.sort(key= lambda x:int(x[2]))
 
 # select X cards to study
 curr_deck = 10
 cards = random.sample(flashcards, curr_deck)
 
 # TODO have user select deck from GUI
-# TODO progress bar
 # TODO set deck size
 # TODO edit card
 # TODO save progress / studied cards
-# TODO random 10 second pauses
 # TODO play a scary noise + picture randomly
 
 flashcard = random.choice(cards)
+
+def pause():
+    if random.randint(0,100) < 15:
+        showans.pack_forget()
+        lbl_display['text'] = "rest"
+        lbl_display.after(6000, showfront)
+
+def showfront():
+    lbl_display['text'] = flashcard[0]
+    showans.pack()
+
 
 def showanswer():
     lbl_display['text'] = flashcard[1]
@@ -50,6 +58,7 @@ def logeasy():
     lbl_display['text'] = flashcard[0]
     hidebuttons()
     bar()
+    pause()
 
 
 def logmedium():
@@ -59,6 +68,7 @@ def logmedium():
     flashcard = random.choice(cards)
     lbl_display['text'] = flashcard[0]
     hidebuttons()
+    pause()
 
 
 
@@ -69,6 +79,7 @@ def loghard():
     flashcard = random.choice(cards)
     lbl_display['text'] = flashcard[0]
     hidebuttons()
+    pause()
 
 
 window = Tk()
@@ -94,8 +105,7 @@ def bar():
 bar_progress.pack(pady=10)
 
 lbl_display = Label(master=frame1, text = flashcard[0])
-#lbl_display.config(height=3, width=20)
-lbl_display.pack(expand=YES, fill= BOTH)
+lbl_display.pack()
 
 showans = Button(master=frame2, text= "Show Answer", command=showanswer)
 showans.pack()
