@@ -22,11 +22,12 @@ cards = random.sample(flashcards, curr_deck)
 # TODO edit card
 # TODO save progress / studied cards
 # TODO play a scary noise + picture randomly
+# TODO make it dark mode // prettier
 
 flashcard = random.choice(cards)
 
 def pause():
-    if random.randint(0,100) < 15:
+    if random.randint(1,100) < 15:
         showans.pack_forget()
         lbl_display['text'] = "rest"
         lbl_display.after(6000, showfront)
@@ -96,7 +97,7 @@ frame1.grid(row=1, column= 0)
 
 frame2.grid(row=2, column=0, sticky='s', pady=10)
 
-# implementing a progress bar
+# implemented a progress bar
 bar_progress = Progressbar(frame0, orient = HORIZONTAL,
         length = 100, mode = 'determinate')
 def bar():
@@ -104,13 +105,15 @@ def bar():
     bar_progress['value'] = 100*(curr_deck - len(cards))/curr_deck
 bar_progress.pack(pady=10)
 
+# main display, alternates between frontcard, backcard, and 'rest'
 lbl_display = Label(master=frame1, text = flashcard[0])
 lbl_display.pack()
 
+# button to show the answer
 showans = Button(master=frame2, text= "Show Answer", command=showanswer)
 showans.pack()
 
-
+# buttons to move on to the next card
 btn_hard = Button(master=frame2, text = "Hard", command=loghard)
 btn_medium = Button(master=frame2, text = "Medium", command=logmedium)
 btn_easy = Button(master=frame2, text ="Easy", command=logeasy)
