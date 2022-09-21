@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import simpledialog
 from tkinter.ttk import *
 import random
 
@@ -58,17 +59,6 @@ def loghard():
     hidebuttons()
     pause()
 
-def loadcards():
-    global curr_deck
-    curr_deck = int(count.get())
-    # remove entry
-    entry1.pack_forget()
-    # remove enter button
-    btn_number.pack_forget()
-    # show card
-    lbl_display.pack()
-    # show nextcard button
-    showans.pack()
 
 # exported anki deck is "{front}     {back}       {number}"
 # read cards from text file into list of cards
@@ -83,7 +73,7 @@ with open(path) as f:
         flashcards.append(card)
 
 # select X cards to study
-curr_deck = 10
+curr_deck = int(simpledialog.askfloat('Cards to study', 'Cards to study'))
 cards = random.sample(flashcards, curr_deck)
 
 # TODO edit card
@@ -92,7 +82,6 @@ cards = random.sample(flashcards, curr_deck)
 # TODO make it dark mode // prettier
 
 flashcard = random.choice(cards)
-
 
 
 window = Tk()
@@ -119,10 +108,11 @@ bar_progress.pack(pady=10)
 
 # main display, alternates between frontcard, backcard, and 'rest'
 lbl_display = Label(master=frame1, text = flashcard[0])
-
+lbl_display.pack()
 
 # button to show the answer
 showans = Button(master=frame2, text= "Show Answer", command=showanswer)
+showans.pack()
 
 
 # buttons to move on to the next card
@@ -130,12 +120,5 @@ btn_hard = Button(master=frame2, text = "Hard", command=loghard)
 btn_medium = Button(master=frame2, text = "Medium", command=logmedium)
 btn_easy = Button(master=frame2, text ="Easy", command=logeasy)
 
-# setting number of cards to study
-count = StringVar()
-entry1 = Entry(frame1, textvariable=count)
-entry1.pack()
-
-btn_number = Button(master= frame1, text='Set # of Cards to Study', command = loadcards)
-btn_number.pack()
 
 window.mainloop()
