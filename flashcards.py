@@ -3,14 +3,30 @@ from tkinter import filedialog
 from tkinter import simpledialog
 from tkinter.ttk import *
 import random
+from PIL import Image, ImageTk
+import datetime
+
 
 
 def pause():
+    # random scary picture, for adrenaline boost to improve memory
+    if random.randint(1,100) < 14:
+        img = ImageTk.PhotoImage(file = 'Ghost_Emoji.png')
+
+        lbl_display.configure(image=img)
+        lbl_display.image=img
+        
+        lbl_display.after(2000, removepic)
+    # random pause
     if random.randint(1,100) < 15:
         showans.pack_forget()
         lbl_display['text'] = "rest"
         lbl_display.after(6000, showfront)
 
+def removepic():
+    lbl_display.configure(image='')
+        
+    
 def showfront():
     lbl_display['text'] = flashcard[0]
     showans.pack()
@@ -32,6 +48,7 @@ def hidebuttons():
 def logeasy():
     # remove card and move to next card
     global flashcard
+    flashcard[2] = datetime.date.today() + datetime.timedelta(days=3) # set due date to 3 days from now
     if len(cards) >= 2:
         cards.remove(flashcard) # card was easy so remove from pile
         flashcard = random.choice(cards)
@@ -48,8 +65,9 @@ def logeasy():
 
 
 def logmedium():
-    # move to next card
+    # move to next card 
     global flashcard
+    flashcard[2] = 2 # type 2 cards are seen and need to be seen again
     flashcard = random.choice(cards)
     lbl_display['text'] = flashcard[0]
     hidebuttons()
@@ -59,6 +77,7 @@ def logmedium():
 def loghard():
     # move to next card
     global flashcard
+    flashcard[2] = 1 # type 1 cards have been seen and need to be seen again
     flashcard = random.choice(cards)
     lbl_display['text'] = flashcard[0]
     hidebuttons()
@@ -82,19 +101,26 @@ path = filedialog.askopenfilename(initialdir='C:\\Users\\jgz6\\Documents\\Coding
 with open(path) as f:
     for row in f:
         card = row.split("		") # anki decks are tab delineated
-        if len(card) != 3: 
+        if len(card) < 3: 
             continue # skip non-compliant cards
+        if len(card) == 3:
+            card.append(datetime.date.today()+datetime.timedelta(days=365)) # initialize due date to far in the future
         flashcards.append(card)
+        # list of [front, back, count, date due]
 
 # select X cards to study
+# pick due cards first
 curr_deck = int(simpledialog.askfloat('Cards to study', 'Cards to study'))
-cards = random.sample(flashcards, curr_deck)
-
+# sort by date due
+flashcards.sort(key=lambda x:x[3])
+cards = flashcards[0:curr_deck]
+flashcard = random.choice(cards)
+card_dist = round(curr_deck/3)
 
 # TODO save progress / studied cards
-# TODO play a scary noise + picture randomly
 
-flashcard = random.choice(cards)
+
+
 
 
 window = Tk()
