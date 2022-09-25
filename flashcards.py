@@ -4,7 +4,8 @@ from tkinter import simpledialog
 from tkinter.ttk import *
 import random
 from PIL import Image, ImageTk
-import datetime
+import datetime as dt
+import csv
 
 
 
@@ -48,7 +49,9 @@ def hidebuttons():
 def logeasy():
     # remove card and move to next card
     global flashcard
-    flashcard[2] = datetime.date.today() + datetime.timedelta(days=3) # set due date to 3 days from now
+    x = dt.date.today() + dt.timedelta(days=3) # set due date to 3 days from now
+    flashcard[3] = x.strftime("%y%m%d") # set due date to 3 days from now
+    flashcards.append(flashcard)
     if len(cards) >= 2:
         cards.remove(flashcard) # card was easy so remove from pile
         flashcard = random.choice(cards)
@@ -99,13 +102,16 @@ flashcards = []
 # select deck from files
 path = filedialog.askopenfilename(initialdir='C:\\Users\\jgz6\\Documents\\Coding', title = 'Select File')
 with open(path) as f:
-    for row in f:
-        card = row.split("		") # anki decks are tab delineated
+    reader = csv.reader(f)
+    for card in reader:
+        
         if len(card) < 3: 
             continue # skip non-compliant cards
         if len(card) == 3:
-            card.append(datetime.date.today()+datetime.timedelta(days=365)) # initialize due date to far in the future
+            y = dt.date.today()
+            card.append(y.strftime("%y%m%d")) # initialize due date to today
         flashcards.append(card)
+        print(card)
         # list of [front, back, count, date due]
 
 # select X cards to study
@@ -113,13 +119,12 @@ with open(path) as f:
 curr_deck = int(simpledialog.askfloat('Cards to study', 'Cards to study'))
 # sort by date due
 flashcards.sort(key=lambda x:x[3])
-cards = flashcards[0:curr_deck]
+cards = []
+
+for i in range(curr_deck):
+    cards.append(flashcards.pop(0))
+
 flashcard = random.choice(cards)
-card_dist = round(curr_deck/3)
-
-# TODO save progress / studied cards
-
-
 
 
 
@@ -166,3 +171,9 @@ btn_edit = Button(master= frame0, text= "Edit", command=edit)
 btn_edit.grid(row= 0, column=0, sticky= W, padx=100, pady=10)
 
 window.mainloop()
+
+# save progress / studied cards
+flashcards.sort(key=lambda x:x[3])
+with open(path, 'w+', newline="") as f:
+    writer = csv.writer(f)
+    writer.writerows(flashcards)
