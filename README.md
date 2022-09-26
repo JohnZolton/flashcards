@@ -11,7 +11,9 @@ Features:
  - Set # of cards desired to study
  - Sorts cards by due date, displays front of card, and progress bar representing completed cards, and allows editing the front and back of the current card
  - Once answer is shown, rate the card as easy, medium or hard and the next card is displayed
- - Easy cards are removed from the mini-deck and the progress bar updates
+   - Easys are removed from the pile and the progress bar updates
+   - Mediums will be shown again after 5 cards
+   - Hards will be shown again after 3 cards
  - Bound keys to buttons for ease of use (ex: spacebar = next)
  - Saves progress upon closing the window by writing the updated flashcard deck to the original CSV file
  
@@ -20,6 +22,9 @@ Features:
 ![image](https://user-images.githubusercontent.com/102374100/192285337-d7023b49-5c38-467a-a868-15e62e5d3639.png)
 
 ![image](https://user-images.githubusercontent.com/102374100/192285434-e74e9aa1-2874-455c-acdc-89d2b43cfc39.png)
+
+Randomly flash a scary picture to boost adrenaline:![image](https://user-images.githubusercontent.com/102374100/192296505-cad7d881-f884-4206-b044-de2752155aae.png)
+
 
 ![image](https://user-images.githubusercontent.com/102374100/192285689-afa4d222-eb32-4ef6-9c87-7197573ae922.png)
 
