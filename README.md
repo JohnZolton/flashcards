@@ -15,6 +15,7 @@ Features:
    - Mediums will be shown again after 5 cards
    - Hards will be shown again after 3 cards
  - Bound keys to buttons for ease of use (ex: spacebar = next)
+ - Cards are tracked using due dates, cards without due dates are assigned as due today. Once a card is marked 'easy' its due date is updated to three days from now. The CSV is sorted according to due date so the earliest "due" cards are selected.
  - Saves progress upon closing the window by writing the updated flashcard deck to the original CSV file
  
  ![image](https://user-images.githubusercontent.com/102374100/192285116-93886d4f-d149-4c51-9b63-ff4cc527514e.png)
