@@ -33,7 +33,7 @@ def showfront():
     showans.pack()
 
 
-def showanswer(event):
+def showanswer():
     lbl_display['text'] = flashcard[1]
     showans.pack_forget()
     btn_easy.pack(side=LEFT)
@@ -46,7 +46,7 @@ def hidebuttons():
     btn_hard.pack_forget()
     showans.pack()
 
-def logeasy(event):
+def logeasy():
     # remove card and move to next card
     global flashcard
     x = dt.date.today() + dt.timedelta(days=3) # set due date to 3 days from now
@@ -67,7 +67,7 @@ def logeasy(event):
 
 
 
-def logmedium(event):
+def logmedium():
     # move to next card 
     global flashcard
     flashcard[2] = 2 # type 2 cards are seen and need to be seen again
@@ -77,7 +77,7 @@ def logmedium(event):
     pause()
 
 
-def loghard(event):
+def loghard():
     # move to next card
     global flashcard
     flashcard[2] = 1 # type 1 cards have been seen and need to be seen again
@@ -161,10 +161,10 @@ showans = Button(master=frame2, text= "Show Answer", command=showanswer)
 showans.pack()
 
 # let key presses activate buttons
-window.bind('<space>', showanswer)
-window.bind('<Key-1>', logeasy)
-window.bind('<Key-2>', logmedium)
-window.bind('<Key-3>', loghard)
+window.bind('<space>', lambda event:showanswer())
+window.bind('<Key-1>', lambda event: logeasy())
+window.bind('<Key-2>', lambda event: logmedium())
+window.bind('<Key-3>', lambda event: loghard())
 
 # buttons to move on to the next card
 btn_hard = Button(master=frame2, text = "Hard", command=loghard)
