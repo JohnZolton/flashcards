@@ -3,8 +3,8 @@
 This is a flashcard app, inspired by Anki and Dr. Andrew Huberman, created using Tkinter. 
 
 Key Features:
- - Random 6 second breaks after a completed card. This boosts memory and learning speed. [Overview](https://www.auxoro.com/blog/learn-skills-faster-andrew-hubereman-neuroscience), [Study](https://www.sciencedirect.com/science/article/pii/S2211124721005398).
- - Randomly flashes a scary picture. This causes an adrenaline jump which signals the brain to remember the events immediately before the adrenaline jump. [Source](https://www.youtube.com/watch?v=JPX8g8ibKFc&t=3422s). 
+ - Random rest intervals after a completed card. This boosts memory and learning speed. [Overview](https://www.auxoro.com/blog/learn-skills-faster-andrew-hubereman-neuroscience), [Study](https://www.sciencedirect.com/science/article/pii/S2211124721005398).
+ - Randomly flashes a scary picture. This causes an adrenaline jump which signals the brain to remember the events immediately before. [Source](https://www.youtube.com/watch?v=JPX8g8ibKFc&t=3422s). 
  
 Features:
  - Select a deck of flashcards to use (as a CSV)
