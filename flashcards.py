@@ -53,8 +53,8 @@ def logeasy():
     flashcard[3] = x.strftime("%y%m%d") # set due date to 3 days from now
     flashcards.append(flashcard)
     if len(cards) >= 2:
-        cards.remove(flashcard) # card was easy so remove from pile
-        flashcard = random.choice(cards)
+        # card was easy so don't insert it back in the deck
+        flashcard = cards.pop(0)
         lbl_display['text'] = flashcard[0]
         hidebuttons()
         bar()
@@ -70,8 +70,8 @@ def logeasy():
 def logmedium():
     # move to next card 
     global flashcard
-    flashcard[2] = 2 # type 2 cards are seen and need to be seen again
-    flashcard = random.choice(cards)
+    cards.insert(4, flashcard) # need to mark mediums somehow, low priority
+    flashcard = cards.pop(0)
     lbl_display['text'] = flashcard[0]
     hidebuttons()
     pause()
@@ -80,8 +80,8 @@ def logmedium():
 def loghard():
     # move to next card
     global flashcard
-    flashcard[2] = 1 # type 1 cards have been seen and need to be seen again
-    flashcard = random.choice(cards)
+    cards.insert(2, flashcard) # how to mark hards?
+    flashcard = cards.pop(0)
     lbl_display['text'] = flashcard[0]
     hidebuttons()
     pause()
@@ -124,7 +124,8 @@ cards = []
 for i in range(curr_deck):
     cards.append(flashcards.pop(0))
 
-flashcard = random.choice(cards)
+print(cards)
+flashcard = cards.pop(0)
 
 
 
