@@ -20,6 +20,8 @@ Features:
  - Cards are tracked using due dates, cards without due dates are assigned as due today. Once a card is marked 'easy' its due date is updated to three days from now. The CSV is sorted according to due date so the earliest "due" cards are selected.
  - Saves progress upon closing the window by writing the updated flashcard deck to the original CSV file
  
+ Anki decks can be exported as a tab deliminated text file. Converter.py converts this file to CSV format. 
+ 
  ![image](https://user-images.githubusercontent.com/102374100/192285116-93886d4f-d149-4c51-9b63-ff4cc527514e.png)
 
 ![image](https://user-images.githubusercontent.com/102374100/192285337-d7023b49-5c38-467a-a868-15e62e5d3639.png)
