@@ -2,6 +2,8 @@
 
 This is a flashcard app, inspired by Anki and Dr. Andrew Huberman, created using Tkinter. 
 
+During a study session, random short rest intervals boost learning speed. The neurons activated while studying actually fire faster during this rest interval resulting in stronger memory formation. Additionally, an adrenaline spike signals the brain to remember the events directly before the adrenalien jump. Like when people experience a traumatic event can vividly remember many details. We can take advantage of these biological mechanisms to study more effectively! My favorite memorization tool is Anki, unfortunately it lacked any features to capitalize on these two mechanisms, so I built my own from scratch using Tkinter. Its key features include random rest intervals and it will randomly flash a scary picture to boost adrenaline.  
+
 Key Features:
  - Random rest intervals after a completed card. This boosts memory and learning speed. [Overview](https://www.auxoro.com/blog/learn-skills-faster-andrew-hubereman-neuroscience), [Study](https://www.sciencedirect.com/science/article/pii/S2211124721005398).
  - Randomly flashes a scary picture. This causes an adrenaline jump which signals the brain to remember the events immediately before. [Source](https://www.youtube.com/watch?v=JPX8g8ibKFc&t=3422s). 
